@@ -57,7 +57,7 @@
 
 
 
-    if (userStatus.steps % 2 === 0) {
+    if (userStatus.steps % 20 === 0) {
       // create a new button
       var waterBtn = document.createElement('button');
         // assign it an id
@@ -87,6 +87,20 @@
       document.getElementById("middle").removeChild(waterBtn);
       });
     }
+
+
+
+
+
+    if (userStatus.steps % 1 === 0) {
+
+      userStatus.energy -= Math.floor(Math.random() * (10 -1 + 1)); 
+    }
+
+
+
+
+
 
     updateDom();
   });
