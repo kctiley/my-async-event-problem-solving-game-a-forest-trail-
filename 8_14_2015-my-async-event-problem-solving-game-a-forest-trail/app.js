@@ -32,7 +32,7 @@
     // puts the new div onto the dom in the left side
     document.getElementById("left").appendChild(walkingText);
 
-    if (userStatus.steps % 10 === 0) {
+    if (userStatus.steps % 5 === 0) {
       // create a new button
       var berryBtn = document.createElement('button');
       // assign it an id
@@ -53,11 +53,11 @@
         document.getElementById("left").appendChild(berriesText);
         document.getElementById("middle").removeChild(berryBtn);
       });
-    }
+    };
 
 
 
-    if (userStatus.steps % 20 === 0) {
+    if (userStatus.steps % 3 === 0) {
       // create a new button
       var waterBtn = document.createElement('button');
         // assign it an id
@@ -78,32 +78,57 @@
 
           userStatus.water ? userStatus.water += waterIncreaseBy : userStatus.water = waterIncreaseBy;
         })();
+        updateDom();
    
-      var waterText = document.createElement('div');
-        // puts the text inside of that div
-      waterText.innerHTML = "you " + waterFind + " find water";
-        // puts the new div onto the dom in the left side
-      document.getElementById("left").appendChild(waterText);
-      document.getElementById("middle").removeChild(waterBtn);
-      });
+        var waterText = document.createElement('div');
+          // puts the text inside of that div
+        waterText.innerHTML = "you " + waterFind + " find water";
+          // puts the new div onto the dom in the left side
+        document.getElementById("left").appendChild(waterText);
+        document.getElementById("middle").removeChild(waterBtn);
+        });
     }
 
-
-
-
-
+    //decreases energy by one with each step or walkBtn
     if (userStatus.steps % 1 === 0) {
-
       userStatus.energy -= Math.floor(Math.random() * (10 -1 + 1)); 
-    }
-
-
-
-
-
-
+    };
     updateDom();
-  });
+    
+  });     
+   
+
+  
+      // add button to eat berries every 20 seconds
+  setInterval(function(){
+      //create a new timed eat berry button
+    if (userStatus.berries > 0){
+      var timedEatBerryBtn = document.createElement('button');
+        // assign it an id
+      timedEatBerryBtn.id = "timed-eat-berry-button"
+        // set the text
+      timedEatBerryBtn.innerHTML = "eat berries timed";
+      document.getElementById("middle").appendChild(timedEatBerryBtn);
+
+      //timedEatBerryBtn.addEventListener('click', function() { 
+      timedEatBerryBtn.addEventListener('click', function() {
+          userStatus.berries -= 1;
+          userStatus.energy += 2;
+          updateDom();
+          var berriesEatenText = document.createElement('div');
+          // puts the text inside of that div
+          berriesEatenText.innerHTML = "you ate berries and gained energy";
+          // puts the new div onto the dom in the left side
+          document.getElementById("left").appendChild(berriesEatenText);
+          document.getElementById("middle").removeChild(timedEatBerryBtn);    
+      });
+    };
+  }, 20000);
+    
+
+
+
+
 
   // update the dom on pageload
   updateDom();
